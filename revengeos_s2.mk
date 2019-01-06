@@ -17,12 +17,20 @@
 # Inherit device configuration
 $(call inherit-product, device/leeco/s2/full_s2.mk)
 
-# Inherit some common LineageOS stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+# Inherit some common RevengeOS stuff.
+TARGET_BOOT_ANIMATION_RES := 1080
+TARGET_GAPPS_ARCH := arm64
+$(call inherit-product, vendor/revengeos/config/common.mk)
+$(call inherit-product, vendor/revengeos/config/gsm.mk)
+IS_PHONE := true
+
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := s2
-PRODUCT_NAME := lineage_s2
+PRODUCT_NAME := revengeos_s2
 PRODUCT_BRAND := LeEco
 PRODUCT_MANUFACTURER := LeMobile
 
